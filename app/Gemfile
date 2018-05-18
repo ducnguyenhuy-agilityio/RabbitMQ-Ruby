@@ -1,0 +1,5 @@
+source 'https://rubygems.org'
+
+gem 'bunny', '~> 2.9', '>= 2.9.2'
+gem 'rake'
+gem 'simplecov', '~> 0.16.1', require: false, group: :test
