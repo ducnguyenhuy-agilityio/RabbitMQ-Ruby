@@ -5,7 +5,7 @@ connection = Bunny.new(hostname: 'rabbitmq', automatically_recover: false)
 connection.start
 
 channel = connection.create_channel
-queue = channel.queue('hello')
+queue = channel.queue('task_queue', durable: true)
 
 message = ARGV.empty? ? 'Hello World!' : ARGV.join(' ')
 

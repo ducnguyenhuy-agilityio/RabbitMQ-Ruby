@@ -5,10 +5,12 @@ connection = Bunny.new(hostname: 'rabbitmq', automatically_recover: false)
 connection.start
 
 channel = connection.create_channel
-queue = channel.queue('hello')
+queue = channel.queue('task_queue', durable: true)
+
+channel.prefetch(1)
+puts '[*] Waiting for messeges. To exit press CTRL+C'
 
 begin
-  puts '[*] Waiting for messeges. To exit press CTRL+C'
   # manual_ack: turn on/off message acknowledgment feature
   queue.subscribe(block: true, manual_ack: true) do |_delivery_info, _properties, body|
     puts "[x] Received #{body}"
